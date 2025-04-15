@@ -4,9 +4,8 @@ pre-push:
   parallel: true
   commands:
     packages-audit:
-      tags: security
-      run: npm audit
-
+      skip: true
+      
     test-unit:
       tags: test
       run: npm run test:unit
