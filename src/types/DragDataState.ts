@@ -18,4 +18,5 @@ export type DragDataState = {
 	curIndex: number | undefined;
 	eventSettings: AnimationSpec<ChartType> | false | undefined;
 	isDragging: boolean;
+	originalValue?: any;
 };

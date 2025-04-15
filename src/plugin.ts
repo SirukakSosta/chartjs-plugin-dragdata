@@ -50,6 +50,29 @@ const ChartJSDragDataPlugin = {
 	afterDestroy(chartInstance) {
 		ChartJSDragDataPlugin.statesStore.delete(chartInstance.id);
 	},
+	// onDrag: (event, datasetIndex, index, value) => {
+	// 	const chart = (event as any).chart;
+	// 	const datasets = chart.data.datasets;
+	// 	const currentDataset = datasets[datasetIndex];
+	// 	const currentData = currentDataset.data[index];
+
+	// 	// Check for collision with other datasets
+	// 	const isColliding = datasets.some((dataset, i) => {
+	// 		if (i === datasetIndex) return false;
+	// 		const dataPoint = dataset.data[index];
+	// 		// Implement your collision detection logic here
+	// 		return checkOverlap(currentData, dataPoint);
+	// 	});
+
+	// 	if (isColliding && pluginOptions.revertOnCollision) {
+	// 		// Revert to original value
+	// 		currentDataset.data[index] = originalValue;
+	// 		chart.update("none");
+	// 		return false; // Prevent further processing
+	// 	}
+
+	// 	return true; // Allow the drag
+	// },
 } as const satisfies ChartPlugin & Record<string, any>;
 
 // TODO: in a future major release, stop auto-registering the plugin and require users to manually register it
