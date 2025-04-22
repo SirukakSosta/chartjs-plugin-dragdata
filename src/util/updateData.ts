@@ -77,10 +77,10 @@ export function updateData<TType extends ChartType>(
 			"r" in dataPoint
 		) {
 			const collided = checkBubbleCollisionPixelSpace(
-				chartInstance,
+				chartInstance as any,
 				state.curDatasetIndex,
 				state.curIndex,
-				dataPoint,
+				dataPoint as any,
 			);
 
 			if (collided) {

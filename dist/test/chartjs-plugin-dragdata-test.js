@@ -364,8 +364,7 @@ function updateData(event, chartInstance, state) {
             dataPoint = calcCartesian(event, chartInstance, dataPoint, draggingConfiguration, state);
         }
         // ✅ Collision check for bubble charts in pixel space
-        if (chartInstance.config.type === "bubble" &&
-            typeof dataPoint === "object" &&
+        if (typeof dataPoint === "object" &&
             "x" in dataPoint &&
             "y" in dataPoint &&
             "r" in dataPoint) {
