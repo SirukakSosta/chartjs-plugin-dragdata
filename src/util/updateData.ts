@@ -71,7 +71,6 @@ export function updateData<TType extends ChartType>(
 
 		// ✅ Collision check for bubble charts in pixel space
 		if (
-			(chartInstance.config as any).type === "bubble" &&
 			typeof dataPoint === "object" &&
 			"x" in dataPoint &&
 			"y" in dataPoint &&
