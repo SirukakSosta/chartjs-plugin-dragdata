@@ -19,6 +19,7 @@ export function updateData<TType extends ChartType>(
 		chartInstance.id,
 	),
 ) {
+	console.log("draga data run");
 	if (!state) return;
 
 	const pluginOptions = chartInstance.options?.plugins
@@ -71,20 +72,32 @@ export function updateData<TType extends ChartType>(
 
 		// ✅ Collision check for bubble charts in pixel space
 		if (
+			(chartInstance.config as any).type === "bubble" &&
 			typeof dataPoint === "object" &&
 			"x" in dataPoint &&
 			"y" in dataPoint &&
 			"r" in dataPoint
 		) {
 			const collided = checkBubbleCollisionPixelSpace(
-				chartInstance as any,
+				chartInstance,
 				state.curDatasetIndex,
 				state.curIndex,
-				dataPoint as any,
+				dataPoint,
 			);
 
 			if (collided) {
 				console.warn("🚫 Bubble collision detected. Drag blocked.");
+
+				// 👇 Cancel dragging state
+				state.isDragging = false;
+				state.element = null;
+
+				// 👇 Remove any active elements (visually unselect the point)
+				chartInstance.setActiveElements([]);
+
+				// 👇 Force an update to reflect UI change
+				chartInstance.update("none");
+
 				return;
 			}
 		}

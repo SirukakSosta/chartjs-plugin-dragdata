@@ -1631,6 +1631,7 @@
   function updateData(event, chartInstance, state) {
       var _a, _b;
       if (state === void 0) { state = ChartJSDragDataPlugin.statesStore.get(chartInstance.id); }
+      console.log("draga data run");
       if (!state)
           return;
       var pluginOptions = (_b = (_a = chartInstance.options) === null || _a === void 0 ? void 0 : _a.plugins) === null || _b === void 0 ? void 0 : _b.dragData;
@@ -1652,13 +1653,21 @@
               dataPoint = calcCartesian(event, chartInstance, dataPoint, draggingConfiguration, state);
           }
           // ✅ Collision check for bubble charts in pixel space
-          if (typeof dataPoint === "object" &&
+          if (chartInstance.config.type === "bubble" &&
+              typeof dataPoint === "object" &&
               "x" in dataPoint &&
               "y" in dataPoint &&
               "r" in dataPoint) {
               var collided = checkBubbleCollisionPixelSpace(chartInstance, state.curDatasetIndex, state.curIndex, dataPoint);
               if (collided) {
                   console.warn("🚫 Bubble collision detected. Drag blocked.");
+                  // 👇 Cancel dragging state
+                  state.isDragging = false;
+                  state.element = null;
+                  // 👇 Remove any active elements (visually unselect the point)
+                  chartInstance.setActiveElements([]);
+                  // 👇 Force an update to reflect UI change
+                  chartInstance.update("none");
                   return;
               }
           }
