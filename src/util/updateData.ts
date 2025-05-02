@@ -19,7 +19,6 @@ export function updateData<TType extends ChartType>(
 		chartInstance.id,
 	),
 ) {
-	console.log("draga data run");
 	if (!state) return;
 
 	const pluginOptions = chartInstance.options?.plugins
@@ -148,6 +147,7 @@ function checkBubbleCollisionPixelSpace(
 			const dy = newY - py;
 			const dist = Math.sqrt(dx * dx + dy * dy);
 
+			// return dist < newR + pr;
 			return dist < newR + pr;
 		});
 	});
