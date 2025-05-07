@@ -1631,7 +1631,6 @@
   function updateData(event, chartInstance, state) {
       var _a, _b;
       if (state === void 0) { state = ChartJSDragDataPlugin.statesStore.get(chartInstance.id); }
-      console.log("draga data run");
       if (!state)
           return;
       var pluginOptions = (_b = (_a = chartInstance.options) === null || _a === void 0 ? void 0 : _a.plugins) === null || _b === void 0 ? void 0 : _b.dragData;
@@ -1703,6 +1702,7 @@
               var dx = newX - px;
               var dy = newY - py;
               var dist = Math.sqrt(dx * dx + dy * dy);
+              // return dist < newR + pr;
               return dist < newR + pr;
           });
       });
